@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/lck/Desktop/RISC-V/basic.hpp
+iostream
+-
+cstdio
+-
+cstring
+-
+bitset
+-
+
+/Users/lck/Desktop/RISC-V/main.cpp
+iostream
+-
+fstream
+-
+cstdio
+-
+cstring
+-
+bitset
+-
+basic.hpp
+/Users/lck/Desktop/RISC-V/basic.hpp
+
