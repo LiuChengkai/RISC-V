@@ -6,10 +6,13 @@
 #include <bitset>
 using namespace std;
 typedef unsigned int uint;
+//#define LOG
+
 
 char mem[0x20000];
 int reg[32];
 int pc = 0;
+int round = 0;
 
 enum instT {
     LUI, AUIPC, JAL, JALR,  // 0~3
@@ -19,6 +22,14 @@ enum instT {
     ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,   //18~26
     ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,    //27~36
 };
+
+void view_reg() {
+    cout << hex << pc << ' ';
+    cout << dec;
+    for (int i = 1; i < 32; ++i)
+        cout << reg[i] << ' ';
+    cout << endl;
+}
 
 struct Instruction {
     int inst, imm;
@@ -145,6 +156,7 @@ struct Instruction {
 
                     case 0b001:
                         type = SLLI;
+                        break;
 
                     case 0b101:
                         if (funct7 == 0)
@@ -189,10 +201,13 @@ struct Instruction {
 
                     case 0b110:
                         type = OR;
+                        break;
 
                     case 0b111:
                         type = AND;
+                        break;
                 }
+                break;
         }
     }
 
@@ -214,27 +229,17 @@ struct Instruction {
 
                 //imm[11:0]
             case JALR:
-            case LB: case LH: case LW:
+            case LB: case LH: case LW: case LBU: case LHU:
             case ADDI: case XORI: case ORI: case ANDI:
+            case SLTIU:
+                //todo here I changed
                 imm = inst >> 20;
                 break;
 
-            case LBU: case LHU:
-            case SLTIU:
-                imm = (uint)inst >> 20;
-                break;
-
                 //imm[12|10:5], imm[4:1|11]
-            case BEQ: case BNE: case BLT: case BGE:
+            case BEQ: case BNE: case BLT: case BGE: case BLTU: case BGEU:
+                //todo here I changed
                 imm = ((((inst >> 31) & 1) << 31) >> 19);
-                imm += ((inst >> 7) & 0b1) << 11;
-                imm += ((inst >> 25) & 0b111111) << 5;
-                imm += ((inst >> 8) & 0b1111) << 1;
-                break;
-
-
-            case BLTU: case BGEU:
-                imm = ((((uint)inst >> 31) & 1) << 12);
                 imm += ((inst >> 7) & 0b1) << 11;
                 imm += ((inst >> 25) & 0b111111) << 5;
                 imm += ((inst >> 8) & 0b1111) << 1;
@@ -242,12 +247,10 @@ struct Instruction {
 
                 //imm[11:5], imm[4:0]
             case SB: case SH: case SW:
-                imm = ((inst >> 25) << 5) & 0b1111111;
+                imm = ((inst >> 25) << 5);
                 imm += (inst >> 7) & 0b11111;
                 break;
 
-            default:
-                ;
         }
     }
 
@@ -261,21 +264,33 @@ struct Instruction {
         get_imm();
     }
 
+
     bool cal_type() {
         bool flag = true;
         switch (type) {
             case LUI:
                 reg[rd] = imm;
+#ifdef LOG
+                printf("Round%d, LUI:\n", round);
+                view_reg();
+#endif
                 break;
 
-                //todo
             case AUIPC:
                 pc = pc + imm;
                 reg[rd] = pc;
+#ifdef LOG
+                printf("Round%d, AUIPC:\n", round);
+                view_reg();
+#endif
                 break;
 
             case ADDI:
                 reg[rd] = reg[rs1] + imm;
+#ifdef LOG
+                printf("Round%d, ADDI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SLTI:
@@ -283,6 +298,10 @@ struct Instruction {
                     reg[rd] = 1;
                 else
                     reg[rd] = 0;
+#ifdef LOG
+                printf("Round%d, SLTI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SLTIU:
@@ -290,42 +309,82 @@ struct Instruction {
                     reg[rd] = 1;
                 else
                     reg[rd] = 0;
+#ifdef LOG
+                printf("Round%d, SLTIU:\n", round);
+                view_reg();
+#endif
                 break;
 
             case XORI:
                 reg[rd] = reg[rs1] ^ imm;
+#ifdef LOG
+                printf("Round%d, XORI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case ORI:
                 reg[rd] = reg[rs1] | imm;
+#ifdef LOG
+                printf("Round%d, ORI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case ANDI:
                 reg[rd] = reg[rs1] & imm;
+#ifdef LOG
+                printf("Round%d, ANDI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SLLI:
                 reg[rd] = reg[rs1] << shamt;
+#ifdef LOG
+                printf("Round%d, SLLI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SRLI:
-                reg[rd] = (uint)reg[rs1] >> shamt;
+                reg[rd] = (uint) reg[rs1] >> shamt;
+#ifdef LOG
+                printf("Round%d, SRLI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SRAI:
                 reg[rd] = reg[rs1] >> shamt;
+#ifdef LOG
+                printf("Round%d, SRAI:\n", round);
+                view_reg();
+#endif
                 break;
 
             case ADD:
                 reg[rd] = reg[rs1] + reg[rs2];
+#ifdef LOG
+                printf("Round%d, ADD:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SUB:
                 reg[rd] = reg[rs1] - reg[rs2];
+#ifdef LOG
+                printf("Round%d, SUB:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SLL:
                 reg[rd] = reg[rs1] << reg[rs2];
+#ifdef LOG
+                printf("Round%d, SLL:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SLT:
@@ -333,6 +392,10 @@ struct Instruction {
                     reg[rd] = 1;
                 else
                     reg[rd] = 0;
+#ifdef LOG
+                printf("Round%d, SLT:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SLTU:
@@ -340,26 +403,50 @@ struct Instruction {
                     reg[rd] = 1;
                 else
                     reg[rd] = 0;
+#ifdef LOG
+                printf("Round%d, SLTU:\n", round);
+                view_reg();
+#endif
                 break;
 
             case XOR:
                 reg[rd] = reg[rs1] ^ reg[rs2];
+#ifdef LOG
+                printf("Round%d, XOR:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SRL:
                 reg[rd] = (uint)reg[rs1] >> (uint)reg[rs2];
+#ifdef LOG
+                printf("Round%d, SRL:\n", round);
+                view_reg();
+#endif
                 break;
 
             case SRA:
                 reg[rd] = reg[rs1] >> reg[rs2];
+#ifdef LOG
+                printf("Round%d, SRA:\n", round);
+                view_reg();
+#endif
                 break;
 
             case OR:
                 reg[rd] = reg[rs1] | reg[rs2];
+#ifdef LOG
+                printf("Round%d, OR:\n", round);
+                view_reg();
+#endif
                 break;
 
             case AND:
                 reg[rd] = reg[rs1] & reg[rs2];
+#ifdef LOG
+                printf("Round%d, AND:\n", round);
+                view_reg();
+#endif
                 break;
 
             default:
@@ -377,11 +464,19 @@ struct Instruction {
             case JAL:
                 reg[rd] = pc + 4;
                 pc = pc + imm;
+#ifdef LOG
+                printf("Round%d, JAL:\n", round);
+                view_reg();
+#endif
                 break;
 
             case JALR:
                 reg[rd] = pc + 4;
                 pc = (reg[rs1] + imm) & (-2);
+#ifdef LOG
+                printf("Round%d, JALR:\n", round);
+                view_reg();
+#endif
                 break;
 
             case BEQ:
@@ -389,6 +484,10 @@ struct Instruction {
                     pc = pc + imm;
                 else
                     pc = pc + 4;
+#ifdef LOG
+                printf("Round%d, BEQ:\n", round);
+                view_reg();
+#endif
                 break;
 
             case BNE:
@@ -396,6 +495,10 @@ struct Instruction {
                     pc = pc + imm;
                 else
                     pc = pc + 4;
+#ifdef LOG
+                printf("Round%d, BNE:\n", round);
+                view_reg();
+#endif
                 break;
 
             case BLT:
@@ -403,6 +506,10 @@ struct Instruction {
                     pc = pc + imm;
                 else
                     pc = pc + 4;
+#ifdef LOG
+                printf("Round%d, BLT:\n", round);
+                view_reg();
+#endif
                 break;
 
             case BGE:
@@ -410,13 +517,22 @@ struct Instruction {
                     pc = pc + imm;
                 else
                     pc = pc + 4;
+#ifdef LOG
+                printf("Round%d, BGE:\n", round);
+                view_reg();
+#endif
                 break;
 
             case BLTU:
-                if ((uint)reg[rs1] < (uint)reg[rs2])
+                if ((uint)reg[rs1] < (uint)reg[rs2]) {
                     pc = pc + imm;
+                }
                 else
                     pc = pc + 4;
+#ifdef LOG
+                printf("Round%d, BLTU:\n", round);
+                view_reg();
+#endif
                 break;
 
             case BGEU:
@@ -424,6 +540,10 @@ struct Instruction {
                     pc = pc + imm;
                 else
                     pc = pc + 4;
+#ifdef LOG
+                printf("Round%d, BGEU:\n", round);
+                view_reg();
+#endif
                 break;
 
             default:
@@ -439,30 +559,50 @@ struct Instruction {
                 int8_t lbtmp;
                 memcpy(&lbtmp, mem + reg[rs1] + imm, 1);
                 reg[rd] = lbtmp;
+#ifdef LOG
+                printf("Round%d, LB:\n", round);
+                view_reg();
+#endif
                 break;
 
             case LH:
                 int16_t lhtmp;
                 memcpy(&lhtmp, mem + reg[rs1] + imm, 2);
                 reg[rd] = lhtmp;
+#ifdef LOG
+                printf("Round%d, LH:\n", round);
+                view_reg();
+#endif
                 break;
 
             case LW:
                 int lwtmp;
                 memcpy(&lwtmp, mem + reg[rs1] + imm, 4);
                 reg[rd] = lwtmp;
+#ifdef LOG
+                printf("Round%d, LW:\n", round);
+                view_reg();
+#endif
                 break;
 
             case LBU:
                 uint8_t lbutmp;
                 memcpy(&lbutmp, mem + reg[rs1] + imm, 1);
                 reg[rd] = lbutmp;
+#ifdef LOG
+                printf("Round%d, LBU:\n", round);
+                view_reg();
+#endif
                 break;
 
             case LHU:
                 uint16_t lhutmp;
                 memcpy(&lhutmp, mem + reg[rs1] + imm, 2);
                 reg[rd] = lhutmp;
+#ifdef LOG
+                printf("Round%d, LHU:\n", round);
+                view_reg();
+#endif
                 break;
 
             default:
@@ -475,27 +615,32 @@ struct Instruction {
 
     bool store_type() {
         bool flag = true;
-        switch (type) {
-            case SB: {
-                int8_t sbtmp = reg[rs2];
-                memcpy(mem + reg[rs1] + imm, &sbtmp, 1);
-                break;
-            }
-
-            case SH: {
-                int16_t shtmp = reg[rs2];
-                memcpy(mem + reg[rs1] + imm, &shtmp, 2);
-                break;
-            }
-
-            case SW: {
-                int swtmp = reg[rs2];
-                memcpy(mem + reg[rs1] + imm, &swtmp, 4);
-                break;
-            }
-
-            default:
-                flag = false;
+        if (type == SB) {
+            int8_t sbtmp = reg[rs2];
+            memcpy(mem + reg[rs1] + imm, &sbtmp, 1);
+#ifdef LOG
+            printf("Round%d, SB:\n", round);
+            view_reg();
+#endif
+        }
+        else if (type == SH) {
+            int16_t sbtmp = reg[rs2];
+            memcpy(mem + reg[rs1] + imm, &sbtmp, 1);
+#ifdef LOG
+            printf("Round%d, SB:\n", round);
+            view_reg();
+#endif
+        }
+        else if (type == SW) {
+            int swtmp = reg[rs2];
+            memcpy(mem + reg[rs1] + imm, &swtmp, 4);
+#ifdef LOG
+            printf("Round%d, SW:\n", round);
+            view_reg();
+#endif
+        }
+        else {
+            flag = false;
         }
         if (flag)
             pc = pc + 4;
