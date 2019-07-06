@@ -154,6 +154,10 @@ struct Instruction {
                         type = ORI;
                         break;
 
+                    case 0b111:
+                        type = ANDI;
+                        break;
+
                     case 0b001:
                         type = SLLI;
                         break;
@@ -251,6 +255,8 @@ struct Instruction {
                 imm += (inst >> 7) & 0b11111;
                 break;
 
+            default:
+                ;
         }
     }
 

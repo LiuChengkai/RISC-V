@@ -105,13 +105,13 @@ void run() {
 
     pc = 0;
     Instruction ins;
-    while (true && round < 100000) {
+    while (true) {
         reg[0] = 0;
-        round++;
 
-        printf("Round%d\n", round);
-        cout << "pc = " << hex << pc << endl;
-        cout << dec;
+//        round++;
+//        printf("Round%d\n", round);
+//        cout << "pc = " << hex << pc << endl;
+//        cout << dec;
         ins.IF();
         if (ins.inst == 0x00c68223)
             break;
@@ -130,8 +130,8 @@ void run() {
 }
 
 int main() {
-    //todo bulgarian, pi, statement_test
-    freopen("bulgarian.data", "r", stdin);
+    //todo pi
+    freopen("pi.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
