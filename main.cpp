@@ -130,8 +130,6 @@ void run() {
 }
 
 int main() {
-    //todo pi
-    freopen("pi.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
