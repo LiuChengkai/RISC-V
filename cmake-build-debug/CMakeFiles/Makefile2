@@ -65,39 +65,39 @@ CMAKE_SOURCE_DIR = /Users/lck/Desktop/RISC-V
 CMAKE_BINARY_DIR = /Users/lck/Desktop/RISC-V/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/RISC_V.dir
+# Target rules for target CMakeFiles/code.dir
 
 # All Build rule for target.
-CMakeFiles/RISC_V.dir/all:
-	$(MAKE) -f CMakeFiles/RISC_V.dir/build.make CMakeFiles/RISC_V.dir/depend
-	$(MAKE) -f CMakeFiles/RISC_V.dir/build.make CMakeFiles/RISC_V.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/lck/Desktop/RISC-V/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target RISC_V"
-.PHONY : CMakeFiles/RISC_V.dir/all
+CMakeFiles/code.dir/all:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/depend
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/lck/Desktop/RISC-V/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target code"
+.PHONY : CMakeFiles/code.dir/all
 
 # Include target in all.
-all: CMakeFiles/RISC_V.dir/all
+all: CMakeFiles/code.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/RISC_V.dir/rule: cmake_check_build_system
+CMakeFiles/code.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lck/Desktop/RISC-V/cmake-build-debug/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/RISC_V.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/code.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lck/Desktop/RISC-V/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/RISC_V.dir/rule
+.PHONY : CMakeFiles/code.dir/rule
 
 # Convenience name for target.
-RISC_V: CMakeFiles/RISC_V.dir/rule
+code: CMakeFiles/code.dir/rule
 
-.PHONY : RISC_V
-
-# clean rule for target.
-CMakeFiles/RISC_V.dir/clean:
-	$(MAKE) -f CMakeFiles/RISC_V.dir/build.make CMakeFiles/RISC_V.dir/clean
-.PHONY : CMakeFiles/RISC_V.dir/clean
+.PHONY : code
 
 # clean rule for target.
-clean: CMakeFiles/RISC_V.dir/clean
+CMakeFiles/code.dir/clean:
+	$(MAKE) -f CMakeFiles/code.dir/build.make CMakeFiles/code.dir/clean
+.PHONY : CMakeFiles/code.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/code.dir/clean
 
 .PHONY : clean
 

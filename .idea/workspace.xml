@@ -205,7 +205,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="RISC_V" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RISC_V" TARGET_NAME="RISC_V" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RISC_V" RUN_TARGET_NAME="RISC_V">
+    <configuration name="code" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RISC_V" TARGET_NAME="code" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RISC_V" RUN_TARGET_NAME="code">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
