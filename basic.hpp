@@ -681,6 +681,14 @@ struct Instruction {
 
     }
 
+    void MA2() {
+
+    }
+
+    void MA3() {
+
+    }
+
     void WB() {
 
     }

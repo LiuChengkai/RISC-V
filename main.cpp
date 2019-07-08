@@ -129,7 +129,12 @@ void run() {
     cout << (((uint)reg[10]) & 255u) << endl;
 }
 
+void run_five_stage() {
+
+}
+
 int main() {
+    freopen("pi.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
