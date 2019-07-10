@@ -12,14 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4266a67-10f0-4baa-b264-64a462b28f0d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/basic.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/RISC_V.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/RISC_V.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/code" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/code" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/new.hpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +31,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="141" column="30" selection-start-line="141" selection-start-column="30" selection-end-line="141" selection-end-column="30" />
+            <state relative-caret-position="128">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#164#2688#0" />
@@ -52,14 +46,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/new.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="613" column="12" selection-start-line="613" selection-start-column="4" selection-end-line="613" selection-end-column="12" />
+            <state relative-caret-position="75">
+              <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
               <folding>
                 <element signature="e#47#66#0" expanded="true" />
+                <element signature="e#389#537#0" />
                 <element signature="e#171#454#1" />
                 <element signature="e#861#898#0" />
                 <element signature="e#1076#1282#0" />
                 <element signature="e#1198#1235#0" />
+                <element signature="e#1478#1589#0" />
                 <element signature="e#1430#1461#0" />
                 <element signature="e#1444#1478#0" />
                 <element signature="e#1613#1645#0" />
@@ -75,6 +71,9 @@
                 <element signature="e#14455#16378#0" />
                 <element signature="e#16380#16420#0" />
                 <element signature="e#18603#18774#0" />
+                <element signature="e#15808#15861#0" expanded="true" />
+                <element signature="e#15970#16017#0" expanded="true" />
+                <element signature="e#16147#16194#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,7 +83,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>lw</find>
       <find>sw</find>
       <find>63</find>
       <find>addi</find>
@@ -114,6 +112,7 @@
       <find>cout</find>
       <find>jalr</find>
       <find>cout_hex</find>
+      <find>COUT</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,13 +143,13 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/basic.hpp" />
         <option value="$PROJECT_DIR$/test.hpp" />
-        <option value="$PROJECT_DIR$/new.hpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/new.hpp" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="width" value="634" />
+    <option name="width" value="688" />
     <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -220,29 +219,29 @@
       <workItem from="1562510883217" duration="41000" />
       <workItem from="1562511007237" duration="14000" />
       <workItem from="1562546778895" duration="18708000" />
-      <workItem from="1562681276267" duration="15953000" />
+      <workItem from="1562681276267" duration="17674000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65175000" />
+    <option name="totallyTimeSpent" value="66896000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="634" height="800" extended-state="6" />
+    <frame x="0" y="0" width="688" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24394184" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24324325" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32928064" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.34260616" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.33089313" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39745402" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32064423" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.3191801" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32956153" />
@@ -253,18 +252,18 @@
       <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24394184" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24324325" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32928064" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.33097595" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39824304" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.34260616" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39745402" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32107496" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32064423" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32956153" />
@@ -424,6 +423,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/ostream">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="998" selection-start-line="998" selection-end-line="998" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.hpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/test.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -434,24 +443,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" column="41" lean-forward="true" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/ostream">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="998" selection-start-line="998" selection-end-line="998" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="141" column="30" selection-start-line="141" selection-start-column="30" selection-end-line="141" selection-end-column="30" />
+        <state relative-caret-position="128">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#164#2688#0" />
@@ -463,14 +458,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/new.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="613" column="12" selection-start-line="613" selection-start-column="4" selection-end-line="613" selection-end-column="12" />
+        <state relative-caret-position="75">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
           <folding>
             <element signature="e#47#66#0" expanded="true" />
+            <element signature="e#389#537#0" />
             <element signature="e#171#454#1" />
             <element signature="e#861#898#0" />
             <element signature="e#1076#1282#0" />
             <element signature="e#1198#1235#0" />
+            <element signature="e#1478#1589#0" />
             <element signature="e#1430#1461#0" />
             <element signature="e#1444#1478#0" />
             <element signature="e#1613#1645#0" />
@@ -486,6 +483,9 @@
             <element signature="e#14455#16378#0" />
             <element signature="e#16380#16420#0" />
             <element signature="e#18603#18774#0" />
+            <element signature="e#15808#15861#0" expanded="true" />
+            <element signature="e#15970#16017#0" expanded="true" />
+            <element signature="e#16147#16194#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -8,17 +8,36 @@
 using namespace std;
 typedef unsigned int uint;
 
+//#define WBLOG
 #define LOG
 
 char mem[0x20000];
 int reg[32];
 int pc = 0;
+int round = 0;
+
 
 void cout_hex(int t) {
     cout.width(8);
     cout.fill('0');
     cout << hex << t << endl;
     cout << dec;
+}
+
+void cerr_hex(int t) {
+    cerr.width(8);
+    cerr.fill('0');
+    cerr << hex << t << endl;
+    cerr << dec;
+}
+
+void view_reg() {
+    cout << round << ' ';
+    cout << hex << pc << ' ';
+    cout << dec;
+    for (int i = 1; i < 32; ++i)
+        cout << reg[i] << ' ';
+    cout << endl;
 }
 
 enum instT {
@@ -346,7 +365,6 @@ void IF() {
 }
 
 bool ID() {
-    //todo
     ID_EX.IR = IF_ID.IR;
     if (IF_ID.IR == 0)
         return 1;
@@ -587,11 +605,11 @@ void store_MEM() {
 
 int MEM() {
     MEM_WB.IR = EX_MEM.IR;
-//    cout << MEM_WB.IR << endl;
     if (EX_MEM.IR == 0)
         return 1;
     if (EX_MEM.IR == 0x00c68223)
         return 0;
+//    cerr_hex(MEM_WB.IR);
 
     MEM_WB.NPC = EX_MEM.NPC;
     MEM_WB.type = EX_MEM.type;
@@ -611,7 +629,6 @@ int MEM() {
     }
 
     EX_MEM.IR = 0;
-    cout_hex(MEM_WB.IR);
     return ret;
 }
 
@@ -619,9 +636,7 @@ void MEM2() {}
 void MEM3() {}
 
 bool WB() {
-//    cout << MEM_WB.IR << endl;
     if (MEM_WB.IR == 0) {
-//        puts("empty in wb");
         return 1;
     }
     if (MEM_WB.IR == 0x00c68223)
@@ -629,22 +644,27 @@ bool WB() {
 
     if (is_ALU(MEM_WB.type)) {
         reg[MEM_WB.rd] = MEM_WB.ALUoutput;
-#ifdef LOG
+#ifdef WBLOG
         cout << MEM_WB.rd << ' ' << MEM_WB.ALUoutput << endl;
 #endif
     }
     else if (is_load(MEM_WB.type)) {
         reg[MEM_WB.rd] = MEM_WB.LMD;
-#ifdef LOG
+#ifdef WBLOG
         cout << MEM_WB.rd << ' ' << MEM_WB.LMD << endl;
 #endif
     }
     else if (MEM_WB.type == JAL || MEM_WB.type == JALR) {
         reg[MEM_WB.rd] = MEM_WB.NPC;
-#ifdef LOG
+#ifdef WBLOG
         cout << MEM_WB.rd << ' ' << MEM_WB.NPC << endl;
 #endif
     }
+
+#ifdef LOG
+    ++round;
+    view_reg();
+#endif
 
     MEM_WB.IR = 0;
     return 1;

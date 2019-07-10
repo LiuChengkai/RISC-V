@@ -138,17 +138,16 @@ void view_memory() {
 
 void run() {
     pc = 0;
-    int round = 0;
-    while (true && round < 201) {
-        ++round;
+    while (true && round < 100) {
         reg[0] = 0;
         if (!WB())
             break;
 
         reg[0] = 0;
-        if (MEM() == 0)
+        int ret = MEM();
+        if (ret == 0)
             continue;
-        else if (MEM() == 2) {
+        else if (ret == 2) {
             MEM2();
             MEM3();
         }
@@ -169,7 +168,7 @@ void run() {
 }
 
 int main() {
-    freopen("sample.data", "r", stdin);
+    freopen("array_test1.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
