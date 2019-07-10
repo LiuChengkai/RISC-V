@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <bitset>
-#include "basic.hpp"
+#include "new.hpp"
 using namespace std;
 typedef unsigned int uint;
 
@@ -100,41 +100,76 @@ void view_memory() {
     }
 }
 
-void run() {
-//    puts("Start running!");
-
-    pc = 0;
-    Instruction ins;
-    while (true) {
-        reg[0] = 0;
-
+//void run() {
+////    puts("Start running!");
+//
+//    pc = 0;
+//    Instruction ins;
+//    while (true) {
+//        reg[0] = 0;
+//
+//#ifdef ROUND
 //        round++;
-//        printf("Round%d\n", round);
-//        cout << "pc = " << hex << pc << endl;
-//        cout << dec;
-        ins.IF();
-        if (ins.inst == 0x00c68223)
+//#endif
+//
+////        printf("Round%d\n", round);
+////        cout << "pc = " << hex << pc << endl;
+////        cout << dec;
+//        ins.IF();
+//        if (ins.inst == 0x00c68223)
+//            break;
+////        cerr << "Round" << round << ' ';
+////        cerr.width(8);
+////        cerr.fill('0');
+////        cerr << hex << ins.inst << endl;
+////        cerr << dec;
+//        ins.ID();
+//        ins.EX();
+//        ins.MEM();
+//        ins.WB();
+//    }
+//
+//#ifdef ROUND
+//    printf("Round = %d\n", round);
+//#endif
+//
+//    cout << (((uint)reg[10]) & 255u) << endl;
+//}
+
+void run() {
+    pc = 0;
+    int round = 0;
+    while (true && round < 201) {
+        ++round;
+        reg[0] = 0;
+        if (!WB())
             break;
-//        cerr << "Round" << round << ' ';
-//        cerr.width(8);
-//        cerr.fill('0');
-//        cerr << hex << ins.inst << endl;
-//        cerr << dec;
-        ins.ID();
-        ins.EX();
-        ins.MA();
-        ins.WB();
+
+        reg[0] = 0;
+        if (MEM() == 0)
+            continue;
+        else if (MEM() == 2) {
+            MEM2();
+            MEM3();
+        }
+
+        reg[0] = 0;
+        if (!EX())
+            continue;
+
+        reg[0] = 0;
+        if (!ID())
+            continue;
+
+        reg[0] = 0;
+        IF();
     }
 
     cout << (((uint)reg[10]) & 255u) << endl;
 }
 
-void run_five_stage() {
-
-}
-
 int main() {
-    freopen("pi.data", "r", stdin);
+    freopen("sample.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
