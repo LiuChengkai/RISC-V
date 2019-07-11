@@ -8,5 +8,4 @@ add_executable(code
 #        test.cpp
         main.cpp
         basic.hpp
-        test.hpp
-        new.hpp)
+        )

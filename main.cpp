@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <bitset>
-#include "new.hpp"
+#include "basic.hpp"
 using namespace std;
 typedef unsigned int uint;
 
