@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/Users/lck/Desktop/RISC-V/basic.hpp
+iostream
+-
+cstdio
+-
+cstring
+-
+bitset
+-
+
 /Users/lck/Desktop/RISC-V/main.cpp
 iostream
 -
@@ -17,16 +27,6 @@ cstring
 -
 bitset
 -
-new.hpp
-/Users/lck/Desktop/RISC-V/new.hpp
-
-/Users/lck/Desktop/RISC-V/new.hpp
-iostream
--
-cstdio
--
-cstring
--
-bitset
--
+basic.hpp
+/Users/lck/Desktop/RISC-V/basic.hpp
 

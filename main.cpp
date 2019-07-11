@@ -144,12 +144,14 @@ void run() {
             break;
 
         reg[0] = 0;
-        int ret = MEM();
-        if (ret == 0)
-            continue;
-        else if (ret == 2) {
+        if (is_load_store(EX_MEM.IR)) {
+            MEM();
             MEM2();
             MEM3();
+        }
+        else {
+            if (!MEM())
+                continue;
         }
 
         reg[0] = 0;

@@ -597,7 +597,7 @@ void store_MEM() {
     }
 }
 
-int MEM() {
+bool MEM() {
     MEM_WB.IR = EX_MEM.IR;
     if (EX_MEM.IR == 0)
         return 1;
@@ -609,21 +609,18 @@ int MEM() {
     MEM_WB.type = EX_MEM.type;
     MEM_WB.rd = EX_MEM.rd;
 
-    int ret = 1;
     if (is_ALU(MEM_WB.IR)) {
         MEM_WB.ALUoutput = EX_MEM.ALUoutput;
     }
     else if (is_load(MEM_WB.IR)) {
         load_MEM();
-        ret = 2;
     }
     else if (is_store(MEM_WB.IR)) {
         store_MEM();
-        ret = 2;
     }
 
     EX_MEM.IR = 0;
-    return ret;
+    return 1;
 }
 
 void MEM2() {}
