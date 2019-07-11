@@ -138,7 +138,7 @@ void view_memory() {
 
 void run() {
     pc = 0;
-    while (true && round < 100) {
+    while (true) {
         reg[0] = 0;
         if (!WB())
             break;
@@ -168,7 +168,7 @@ void run() {
 }
 
 int main() {
-    freopen("array_test1.data", "r", stdin);
+    freopen("pi.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
