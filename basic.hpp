@@ -526,12 +526,12 @@ void branch_EX() {
     }
 }
 
-bool EX() {
+void EX() {
     EX_MEM.IR = ID_EX.IR;
     if (ID_EX.IR == 0)
-        return 1;
+        return;
     if (ID_EX.IR == 0x00c68223)
-        return 0;
+        return;
 
     EX_MEM.NPC = ID_EX.NPC;
     EX_MEM.type = ID_EX.type;
@@ -548,7 +548,7 @@ bool EX() {
     }
 
     ID_EX.IR = 0;
-    return 1;
+    return;
 }
 
 void load_MEM() {
@@ -597,12 +597,12 @@ void store_MEM() {
     }
 }
 
-bool MEM() {
+void MEM() {
     MEM_WB.IR = EX_MEM.IR;
     if (EX_MEM.IR == 0)
-        return 1;
+        return;
     if (EX_MEM.IR == 0x00c68223)
-        return 0;
+        return;
 //    cerr_hex(MEM_WB.IR);
 
     MEM_WB.NPC = EX_MEM.NPC;
@@ -620,7 +620,7 @@ bool MEM() {
     }
 
     EX_MEM.IR = 0;
-    return 1;
+    return;
 }
 
 void MEM2() {}

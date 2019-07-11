@@ -150,13 +150,11 @@ void run() {
             MEM3();
         }
         else {
-            if (!MEM())
-                continue;
+            MEM();
         }
 
         reg[0] = 0;
-        if (!EX())
-            continue;
+        EX();
 
         reg[0] = 0;
         if (!ID())
