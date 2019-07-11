@@ -168,7 +168,7 @@ void run() {
 }
 
 int main() {
-    freopen("pi.data", "r", stdin);
+//    freopen("pi.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
