@@ -100,42 +100,6 @@ void view_memory() {
     }
 }
 
-//void run() {
-////    puts("Start running!");
-//
-//    pc = 0;
-//    Instruction ins;
-//    while (true) {
-//        reg[0] = 0;
-//
-//#ifdef ROUND
-//        round++;
-//#endif
-//
-////        printf("Round%d\n", round);
-////        cout << "pc = " << hex << pc << endl;
-////        cout << dec;
-//        ins.IF();
-//        if (ins.inst == 0x00c68223)
-//            break;
-////        cerr << "Round" << round << ' ';
-////        cerr.width(8);
-////        cerr.fill('0');
-////        cerr << hex << ins.inst << endl;
-////        cerr << dec;
-//        ins.ID();
-//        ins.EX();
-//        ins.MEM();
-//        ins.WB();
-//    }
-//
-//#ifdef ROUND
-//    printf("Round = %d\n", round);
-//#endif
-//
-//    cout << (((uint)reg[10]) & 255u) << endl;
-//}
-
 void run() {
     pc = 0;
     while (true) {
@@ -163,7 +127,7 @@ void run() {
 }
 
 int main() {
-//    freopen("pi.data", "r", stdin);
+    freopen("pi.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();
