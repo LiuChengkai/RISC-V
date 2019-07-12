@@ -8,7 +8,6 @@
 using namespace std;
 typedef unsigned int uint;
 
-//#define WBLOG
 //#define LOG
 
 char mem[0x20000];
