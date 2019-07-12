@@ -139,12 +139,11 @@ void view_memory() {
 void run() {
     pc = 0;
     while (true) {
-        reg[0] = 0;
         if (!WB())
             break;
 
         reg[0] = 0;
-        if (is_load_store(EX_MEM.IR)) {
+        if (is_load_store(EX_MEM.type)) {
             MEM();
             MEM2();
             MEM3();
@@ -153,14 +152,11 @@ void run() {
             MEM();
         }
 
-        reg[0] = 0;
         EX();
 
-        reg[0] = 0;
         if (!ID())
             continue;
 
-        reg[0] = 0;
         IF();
     }
 

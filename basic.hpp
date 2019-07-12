@@ -41,49 +41,24 @@ enum instT {
 };
 
 bool is_ALU(instT inst) {
-    return (inst == LUI || inst == AUIPC || inst == ADDI || inst == SLTI || inst == SLTIU || inst == XORI || inst == ORI || inst == SLLI || inst == SRLI || inst == SRAI
+    return (inst == LUI || inst == AUIPC || inst == ADDI || inst == SLTI || inst == SLTIU || inst == XORI || inst == ORI || inst == ANDI || inst == SLLI || inst == SRLI || inst == SRAI
             || inst == ADD || inst == SUB  || inst == SLL || inst == SLT || inst == SLTU || inst == XOR || inst == SRL || inst == SRA || inst == OR || inst == AND);
-}
-
-bool is_ALU(int inst) {
-    int opcode = (inst & 0b1111111);
-    return (opcode == 0b0110111 || opcode == 0b0010111 || opcode == 0b0010011 || opcode == 0b0110011);
 }
 
 bool is_load_store(instT inst) {
     return (inst == LB || inst == LH || inst == LW || inst == LBU || inst == LHU || inst == SB || inst == SH || inst == SW);
 }
 
-bool is_load_store(int inst) {
-    int opcode = (inst & 0b1111111);
-    return (opcode == 0b0000011 || opcode == 0b0100011);
-}
-
 bool is_load(instT inst) {
     return (inst == LB || inst == LH || inst == LW || inst == LBU || inst == LHU);
-}
-
-bool is_load(int inst) {
-    int opcode = (inst & 0b1111111);
-    return (opcode == 0b0000011);
 }
 
 bool is_store(instT inst) {
     return (inst == SB || inst == SH || inst == SW);
 }
 
-bool is_store(int inst) {
-    int opcode = (inst & 0b1111111);
-    return (opcode == 0b0100011);
-}
-
 bool is_branch(instT inst) {
     return (inst == JAL || inst == JALR || inst == BEQ || inst == BNE || inst == BLT || inst == BGE || inst == BLTU || inst == BGEU);
-}
-
-bool is_branch(int inst) {
-    int opcode = (inst & 0b1111111);
-    return (opcode == 0b1101111 || opcode == 0b1100111 || opcode == 0b1100011);
 }
 
 struct _IF_ID {
@@ -344,7 +319,7 @@ struct _MEM_WB {
 void IF() {
     memcpy(&IF_ID.IR, mem + pc, 4);
     //处理control hazard
-    if (EX_MEM.IR && is_branch(EX_MEM.IR) && EX_MEM.cond) {
+    if (EX_MEM.IR && is_branch(EX_MEM.type) && EX_MEM.cond) {
         pc = IF_ID.NPC = EX_MEM.ALUoutput;
         IF_ID.IR = 0;
         ID_EX.IR = 0;
@@ -366,22 +341,22 @@ bool ID() {
     ID_EX.get_imm();
 
     //处理data hazard, rs1存在冲突时
-    if (EX_MEM.IR && (is_ALU(EX_MEM.IR) || is_load(EX_MEM.IR))
+    if (EX_MEM.IR && (is_ALU(EX_MEM.type) || is_load(EX_MEM.type))
         && EX_MEM.rd == ID_EX.rs1) {
-        if (is_ALU(EX_MEM.IR)) {
+        if (is_ALU(EX_MEM.type)) {
             ID_EX.A = EX_MEM.ALUoutput;
         }
-        else if (is_load(EX_MEM.IR)) {
+        else if (is_load(EX_MEM.type)) {
             ID_EX.IR = 0;
             return 0;
         }
     }
-    else if (MEM_WB.IR && (is_ALU(MEM_WB.IR) || is_load(MEM_WB.IR))
+    else if (MEM_WB.IR && (is_ALU(MEM_WB.type) || is_load(MEM_WB.type))
              && MEM_WB.rd == ID_EX.rs1) {
-        if (is_ALU(MEM_WB.IR)) {
+        if (is_ALU(MEM_WB.type)) {
             ID_EX.A = MEM_WB.ALUoutput;
         }
-        else if (is_load(MEM_WB.IR)) {
+        else if (is_load(MEM_WB.type)) {
             ID_EX.A = MEM_WB.LMD;
         }
     }
@@ -390,22 +365,22 @@ bool ID() {
     }
 
     //处理data hazard, rs2存在冲突时
-    if (EX_MEM.IR && (is_ALU(EX_MEM.IR) || is_load(EX_MEM.IR))
+    if (EX_MEM.IR && (is_ALU(EX_MEM.type) || is_load(EX_MEM.type))
         && EX_MEM.rd == ID_EX.rs2) {
-        if (is_ALU(EX_MEM.IR)) {
+        if (is_ALU(EX_MEM.type)) {
             ID_EX.B = EX_MEM.ALUoutput;
         }
-        else if (is_load(EX_MEM.IR)) {
+        else if (is_load(EX_MEM.type)) {
             ID_EX.IR = 0;
             return 0;
         }
     }
-    else if (MEM_WB.IR && (is_ALU(MEM_WB.IR) || is_load(MEM_WB.IR))
+    else if (MEM_WB.IR && (is_ALU(MEM_WB.type) || is_load(MEM_WB.type))
              && MEM_WB.rd == ID_EX.rs2) {
-        if (is_ALU(MEM_WB.IR)) {
+        if (is_ALU(MEM_WB.type)) {
             ID_EX.B = MEM_WB.ALUoutput;
         }
-        else if (is_load(MEM_WB.IR)) {
+        else if (is_load(MEM_WB.type)) {
             ID_EX.B = MEM_WB.LMD;
         }
     }
@@ -537,13 +512,13 @@ void EX() {
     EX_MEM.type = ID_EX.type;
     EX_MEM.rd = ID_EX.rd;
 
-    if (is_ALU(EX_MEM.IR)) {
+    if (is_ALU(EX_MEM.type)) {
         ALU_EX();
     }
-    else if (is_load_store(EX_MEM.IR)) {
+    else if (is_load_store(EX_MEM.type)) {
         LS_EX();
     }
-    else if (is_branch(EX_MEM.IR)) {
+    else if (is_branch(EX_MEM.type)) {
         branch_EX();
     }
 
@@ -603,19 +578,18 @@ void MEM() {
         return;
     if (EX_MEM.IR == 0x00c68223)
         return;
-//    cerr_hex(MEM_WB.IR);
 
     MEM_WB.NPC = EX_MEM.NPC;
     MEM_WB.type = EX_MEM.type;
     MEM_WB.rd = EX_MEM.rd;
 
-    if (is_ALU(MEM_WB.IR)) {
+    if (is_ALU(MEM_WB.type)) {
         MEM_WB.ALUoutput = EX_MEM.ALUoutput;
     }
-    else if (is_load(MEM_WB.IR)) {
+    else if (is_load(MEM_WB.type)) {
         load_MEM();
     }
-    else if (is_store(MEM_WB.IR)) {
+    else if (is_store(MEM_WB.type)) {
         store_MEM();
     }
 
@@ -643,23 +617,14 @@ bool WB() {
     if (MEM_WB.IR == 0x00c68223)
         return 0;
 
-    if (is_ALU(MEM_WB.IR)) {
+    if (is_ALU(MEM_WB.type)) {
         reg[MEM_WB.rd] = MEM_WB.ALUoutput;
-#ifdef WBLOG
-        cout << MEM_WB.rd << ' ' << MEM_WB.ALUoutput << endl;
-#endif
     }
-    else if (is_load(MEM_WB.IR)) {
+    else if (is_load(MEM_WB.type)) {
         reg[MEM_WB.rd] = MEM_WB.LMD;
-#ifdef WBLOG
-        cout << MEM_WB.rd << ' ' << MEM_WB.LMD << endl;
-#endif
     }
     else if (MEM_WB.type == JAL || MEM_WB.type == JALR) {
         reg[MEM_WB.rd] = MEM_WB.NPC;
-#ifdef WBLOG
-        cout << MEM_WB.rd << ' ' << MEM_WB.NPC << endl;
-#endif
     }
 
 #ifdef LOG
