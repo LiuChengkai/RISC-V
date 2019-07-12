@@ -142,7 +142,6 @@ void run() {
         if (!WB())
             break;
 
-        reg[0] = 0;
         if (is_load_store(EX_MEM.type)) {
             MEM();
             MEM2();

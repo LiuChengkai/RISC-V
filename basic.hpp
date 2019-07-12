@@ -632,6 +632,7 @@ bool WB() {
     view_reg();
 #endif
 
+    reg[0] = 0;
     MEM_WB.IR = 0;
     return 1;
 }
