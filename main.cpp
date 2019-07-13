@@ -127,7 +127,7 @@ void run() {
 }
 
 int main() {
-    freopen("array_test1.data", "r", stdin);
+//    freopen("expr.data", "r", stdin);
     init_memory();
 //    view_memory();
     run();

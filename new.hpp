@@ -15,30 +15,6 @@ int reg[32];
 int pc = 0;
 int round = 0;
 
-int bht[0x20000];   //Brnch History Table, 2 bit
-int btb[0x20000];   //Branch Prediction Buffer
-
-bool predict(int x) {
-    if (x == 0 || x == 1)
-        return 0;
-    else
-        return 1;
-}
-
-void update(bool flag, int &x) {
-    if (flag) {
-        if (x == 0) {x = 1; return;}
-        if (x == 1) {x = 3; return;}
-        if (x == 2) {x = 3; return;}
-        if (x == 3) {return;}
-    }
-    else {
-        if (x == 0) {return;}
-        if (x == 1) {x = 0; return;}
-        if (x == 2) {x = 0; return;}
-        if (x == 3) {x = 2; return;}
-    }
-}
 
 void cout_hex(int t) {
     cout.width(8);
@@ -84,27 +60,13 @@ bool is_branch(instT inst) {
     return (inst == JAL || inst == JALR || inst == BEQ || inst == BNE || inst == BLT || inst == BGE || inst == BLTU || inst == BGEU);
 }
 
-bool is_branch(int IR) {
-    int opcode = (IR & 0b1111111);
-    return (opcode == 0b1101111 || opcode == 0b1100111 || opcode == 0b1100011);
-}
-
-bool is_JALR(int IR) {
-    int opcode = (IR & 0b1111111);
-    return opcode == 0b1100111;
-}
-
 struct _IF_ID {
-    int pc;
-    int pre;
     int IR;
     int NPC;
 
 } IF_ID;
 
 struct _ID_EX {
-    int pc;
-    int pre;
     int IR;
     int NPC;
     int A, B;
@@ -333,8 +295,6 @@ struct _ID_EX {
 } ID_EX;
 
 struct _EX_MEM {
-    int pc;
-    int pre;
     int IR;
     int NPC;
     int ALUoutput;
@@ -357,44 +317,19 @@ struct _MEM_WB {
 
 void IF() {
     memcpy(&IF_ID.IR, mem + pc, 4);
-    IF_ID.pc = pc;
-
-    //预测失败
-    if (EX_MEM.IR && is_branch(EX_MEM.type) && (EX_MEM.pre != EX_MEM.cond)) {
-        if (EX_MEM.cond) {
-            pc = EX_MEM.ALUoutput;
-            IF_ID.NPC = EX_MEM.pc + 4;
-            IF_ID.IR = 0;
-            ID_EX.IR = 0;
-        }
-        else {
-            pc = IF_ID.NPC = EX_MEM.pc + 4;
-            IF_ID.IR = 0;
-            ID_EX.IR = 0;
-        }
+    //处理control hazard
+    if (EX_MEM.IR && is_branch(EX_MEM.type) && EX_MEM.cond) {
+        pc = IF_ID.NPC = EX_MEM.ALUoutput;
+        IF_ID.IR = 0;
+        ID_EX.IR = 0;
     }
     else {
-        if (is_branch(IF_ID.IR)) {
-            if (predict(bht[pc]) && btb[pc] && !is_JALR(IF_ID.IR)) {
-                IF_ID.pre = 1;
-                IF_ID.NPC = pc + 4;
-                pc = btb[pc];
-            }
-            else {
-                IF_ID.pre = 0;
-                pc = IF_ID.NPC = pc + 4;
-            }
-        }
-        else {
-            pc = IF_ID.NPC = pc + 4;
-        }
+        IF_ID.NPC = pc = pc + 4;
     }
     return;
 }
 
 bool ID() {
-    ID_EX.pc = IF_ID.pc;
-    ID_EX.pre = IF_ID.pre;
     ID_EX.IR = IF_ID.IR;
     if (IF_ID.IR == 0)
         return 1;
@@ -566,8 +501,6 @@ void branch_EX() {
 }
 
 void EX() {
-    EX_MEM.pc = ID_EX.pc;
-    EX_MEM.pre = ID_EX.pre;
     EX_MEM.IR = ID_EX.IR;
     if (ID_EX.IR == 0)
         return;
@@ -586,11 +519,6 @@ void EX() {
     }
     else if (is_branch(EX_MEM.type)) {
         branch_EX();
-
-        update(EX_MEM.cond, bht[EX_MEM.pc]);
-        if (EX_MEM.cond) {
-            btb[EX_MEM.pc] = EX_MEM.ALUoutput;
-        }
     }
 
     ID_EX.IR = 0;
@@ -672,12 +600,9 @@ void MEM2() {}
 void MEM3() {}
 
 void view_reg() {
-    if (is_branch(MEM_WB.type)) {
-        cout << "B  ";
-    }
-    else
-        cout << round << ' ';
-    cout << hex << MEM_WB.NPC - 4 << ' ';
+    cout << "type:" << MEM_WB.type << ' ';
+    cout << round << ' ';
+    cout << dec << MEM_WB.NPC - 4 << ' ';
     cout << dec;
     for (int i = 1; i < 32; ++i)
         cout << reg[i] << ' ';
