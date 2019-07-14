@@ -63,6 +63,15 @@ enum instT {
     ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,    //27~36
 };
 
+string instS[37] = {
+        "LUI", "AUIPC", "JAL", "JALR",
+        "BEQ", "BNE", "BLT", "BGE", "BLTU", "BGEU",
+        "LB", "LH", "LW", "LBU", "LHU",
+        "SB", "SH", "SW",
+        "ADDI", "SLTI", "SLTIU", "XORI", "ORI", "ANDI", "SLLI", "SRLI", "SRAI",
+        "ADD", "SUB", "SLL", "SLT", "SLTU", "XOR", "SRL", "SRA", "OR", "AND"
+};
+
 bool is_ALU(instT inst) {
     return (inst == LUI || inst == AUIPC || inst == ADDI || inst == SLTI || inst == SLTIU || inst == XORI || inst == ORI || inst == ANDI || inst == SLLI || inst == SRLI || inst == SRAI
             || inst == ADD || inst == SUB  || inst == SLL || inst == SLT || inst == SLTU || inst == XOR || inst == SRL || inst == SRA || inst == OR || inst == AND);
@@ -87,6 +96,11 @@ bool is_branch(instT inst) {
 bool is_branch(int IR) {
     int opcode = (IR & 0b1111111);
     return (opcode == 0b1101111 || opcode == 0b1100111 || opcode == 0b1100011);
+}
+
+bool is_JAL(int IR) {
+    int opcode = (IR & 0b1111111);
+    return opcode == 0b1101111;
 }
 
 bool is_JALR(int IR) {
@@ -346,6 +360,7 @@ struct _EX_MEM {
 } EX_MEM;
 
 struct _MEM_WB {
+    int pc;
     int IR;
     int NPC;
     int ALUoutput;
@@ -357,18 +372,18 @@ struct _MEM_WB {
 
 void IF() {
     memcpy(&IF_ID.IR, mem + pc, 4);
+    //IF_ID.pc是跳转之前的pc
     IF_ID.pc = pc;
 
     //预测失败
     if (EX_MEM.IR && is_branch(EX_MEM.type) && (EX_MEM.pre != EX_MEM.cond)) {
         if (EX_MEM.cond) {
             pc = EX_MEM.ALUoutput;
-            IF_ID.NPC = EX_MEM.pc + 4;
             IF_ID.IR = 0;
             ID_EX.IR = 0;
         }
         else {
-            pc = IF_ID.NPC = EX_MEM.pc + 4;
+            pc = EX_MEM.pc + 4;
             IF_ID.IR = 0;
             ID_EX.IR = 0;
         }
@@ -377,35 +392,33 @@ void IF() {
         if (is_branch(IF_ID.IR)) {
             if (predict(bht[pc]) && btb[pc] && !is_JALR(IF_ID.IR)) {
                 IF_ID.pre = 1;
-                IF_ID.NPC = pc + 4;
                 pc = btb[pc];
             }
             else {
                 IF_ID.pre = 0;
-                pc = IF_ID.NPC = pc + 4;
+                pc = pc + 4;
             }
         }
         else {
-            pc = IF_ID.NPC = pc + 4;
+            pc = pc + 4;
         }
     }
     return;
 }
 
 bool ID() {
-    ID_EX.pc = IF_ID.pc;
-    ID_EX.pre = IF_ID.pre;
     ID_EX.IR = IF_ID.IR;
     if (IF_ID.IR == 0)
         return 1;
 
-    ID_EX.NPC = IF_ID.NPC;
+    ID_EX.pc = IF_ID.pc;
+    ID_EX.pre = IF_ID.pre;
     ID_EX.update();
     ID_EX.get_type();
     ID_EX.get_imm();
 
     //处理data hazard, rs1存在冲突时
-    if (EX_MEM.IR && (is_ALU(EX_MEM.type) || is_load(EX_MEM.type))
+    if (EX_MEM.IR && (is_ALU(EX_MEM.type) || is_load(EX_MEM.type) || EX_MEM.type == JAL || EX_MEM.type == JALR)
         && EX_MEM.rd == ID_EX.rs1) {
         if (is_ALU(EX_MEM.type)) {
             ID_EX.A = EX_MEM.ALUoutput;
@@ -414,8 +427,11 @@ bool ID() {
             ID_EX.IR = 0;
             return 0;
         }
+        else {
+            ID_EX.A = EX_MEM.pc + 4;
+        }
     }
-    else if (MEM_WB.IR && (is_ALU(MEM_WB.type) || is_load(MEM_WB.type))
+    else if (MEM_WB.IR && (is_ALU(MEM_WB.type) || is_load(MEM_WB.type) || MEM_WB.type == JAL || MEM_WB.type == JALR)
              && MEM_WB.rd == ID_EX.rs1) {
         if (is_ALU(MEM_WB.type)) {
             ID_EX.A = MEM_WB.ALUoutput;
@@ -423,13 +439,16 @@ bool ID() {
         else if (is_load(MEM_WB.type)) {
             ID_EX.A = MEM_WB.LMD;
         }
+        else {
+            ID_EX.A = MEM_WB.pc + 4;
+        }
     }
     else {
         ID_EX.A = reg[ID_EX.rs1];
     }
 
     //处理data hazard, rs2存在冲突时
-    if (EX_MEM.IR && (is_ALU(EX_MEM.type) || is_load(EX_MEM.type))
+    if (EX_MEM.IR && (is_ALU(EX_MEM.type) || is_load(EX_MEM.type) || EX_MEM.type == JAL || EX_MEM.type == JALR)
         && EX_MEM.rd == ID_EX.rs2) {
         if (is_ALU(EX_MEM.type)) {
             ID_EX.B = EX_MEM.ALUoutput;
@@ -438,14 +457,20 @@ bool ID() {
             ID_EX.IR = 0;
             return 0;
         }
+        else {
+            ID_EX.B = EX_MEM.pc + 4;
+        }
     }
-    else if (MEM_WB.IR && (is_ALU(MEM_WB.type) || is_load(MEM_WB.type))
+    else if (MEM_WB.IR && (is_ALU(MEM_WB.type) || is_load(MEM_WB.type) || MEM_WB.type == JAL || MEM_WB.type == JALR)
              && MEM_WB.rd == ID_EX.rs2) {
         if (is_ALU(MEM_WB.type)) {
             ID_EX.B = MEM_WB.ALUoutput;
         }
         else if (is_load(MEM_WB.type)) {
             ID_EX.B = MEM_WB.LMD;
+        }
+        else {
+            ID_EX.B = MEM_WB.pc + 4;
         }
     }
     else {
@@ -464,7 +489,7 @@ void ALU_EX() {
             EX_MEM.ALUoutput = ID_EX.imm;
             break;
         case AUIPC:
-            EX_MEM.ALUoutput = ID_EX.NPC + ID_EX.imm - 4;
+            EX_MEM.ALUoutput = ID_EX.pc + ID_EX.imm;
             break;
         case ADDI:
             EX_MEM.ALUoutput = ID_EX.A + ID_EX.imm;
@@ -533,8 +558,9 @@ void LS_EX() {
 }
 
 void branch_EX() {
+    //todo here is wrong
     //JALR是特殊情况，ALUOutput(pc)需要重新计算，其他指令类型只需要计算cond
-    EX_MEM.ALUoutput = ID_EX.NPC - 4 + ID_EX.imm;
+    EX_MEM.ALUoutput = ID_EX.pc + ID_EX.imm;
     switch (EX_MEM.type) {
         case JAL:
             EX_MEM.cond = 1;
@@ -566,15 +592,14 @@ void branch_EX() {
 }
 
 void EX() {
-    EX_MEM.pc = ID_EX.pc;
-    EX_MEM.pre = ID_EX.pre;
     EX_MEM.IR = ID_EX.IR;
     if (ID_EX.IR == 0)
         return;
     if (ID_EX.IR == 0x00c68223)
         return;
 
-    EX_MEM.NPC = ID_EX.NPC;
+    EX_MEM.pc = ID_EX.pc;
+    EX_MEM.pre = ID_EX.pre;
     EX_MEM.type = ID_EX.type;
     EX_MEM.rd = ID_EX.rd;
 
@@ -650,7 +675,7 @@ void MEM() {
     if (EX_MEM.IR == 0x00c68223)
         return;
 
-    MEM_WB.NPC = EX_MEM.NPC;
+    MEM_WB.pc = EX_MEM.pc;
     MEM_WB.type = EX_MEM.type;
     MEM_WB.rd = EX_MEM.rd;
 
@@ -672,12 +697,8 @@ void MEM2() {}
 void MEM3() {}
 
 void view_reg() {
-    if (is_branch(MEM_WB.type)) {
-        cout << "B  ";
-    }
-    else
-        cout << round << ' ';
-    cout << hex << MEM_WB.NPC - 4 << ' ';
+    cout << "Round " << round << ", " << instS[MEM_WB.type] << endl;
+    cout << hex << MEM_WB.pc << ' ';
     cout << dec;
     for (int i = 1; i < 32; ++i)
         cout << reg[i] << ' ';
@@ -698,7 +719,7 @@ bool WB() {
         reg[MEM_WB.rd] = MEM_WB.LMD;
     }
     else if (MEM_WB.type == JAL || MEM_WB.type == JALR) {
-        reg[MEM_WB.rd] = MEM_WB.NPC;
+        reg[MEM_WB.rd] = MEM_WB.pc + 4;
     }
 
 #ifdef LOG

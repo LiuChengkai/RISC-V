@@ -13,10 +13,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b4266a67-10f0-4baa-b264-64a462b28f0d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/basic.hpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/RISC_V.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/RISC_V.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/code" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/code" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -44,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="129" column="20" selection-start-line="129" selection-start-column="20" selection-end-line="129" selection-end-column="20" />
+            <state relative-caret-position="197">
+              <caret line="125" column="34" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#164#2688#0" />
@@ -58,26 +57,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/basic.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-597">
-              <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="215">
+              <caret line="715" column="29" selection-start-line="715" selection-start-column="29" selection-end-line="715" selection-end-column="29" />
               <folding>
                 <element signature="e#47#66#0" expanded="true" />
                 <element signature="e#283#313#0" />
                 <element signature="e#380#537#0" />
                 <element signature="e#247#357#0" />
                 <element signature="e#359#469#0" />
-                <element signature="e#1660#1703#1" />
+                <element signature="e#1681#2058#0" />
                 <element signature="e#1712#7518#1" />
                 <element signature="e#7527#7643#1" />
                 <element signature="e#7653#7757#1" />
-                <element signature="e#8058#9594#0" />
-                <element signature="e#9597#11590#0" />
                 <element signature="e#11592#11676#0" />
-                <element signature="e#11678#12579#0" />
                 <element signature="e#15688#16512#0" />
                 <element signature="e#16514#16899#0" />
-                <element signature="e#16901#17362#0" />
-                <element signature="e#17051#17075#0" expanded="true" />
+                <element signature="e#17934#17958#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/new.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="323" column="21" lean-forward="true" selection-start-line="323" selection-start-column="21" selection-end-line="323" selection-end-column="21" />
+            <state relative-caret-position="154">
+              <caret line="317" column="9" selection-start-line="317" selection-start-column="5" selection-end-line="317" selection-end-column="9" />
               <folding>
                 <element signature="e#47#66#0" expanded="true" />
                 <element signature="e#15342#15366#0" expanded="true" />
@@ -100,13 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>load</find>
-      <find>struct</find>
-      <find>MA</find>
-      <find>if</find>
-      <find>cal_type</find>
-      <find>bool_init</find>
-      <find>load_type</find>
       <find>pc</find>
       <find>cout</find>
       <find>jalr</find>
@@ -115,13 +103,11 @@
       <find>ALUoutput</find>
       <find>.type</find>
       <find>aluoutput</find>
-      <find>addi</find>
       <find>bne</find>
       <find>110</find>
       <find>bge</find>
       <find>mem</find>
       <find>id</find>
-      <find>.ir</find>
       <find>50</find>
       <find>VIEW_REG</find>
       <find>btb[pc]</find>
@@ -129,6 +115,15 @@
       <find>bht</find>
       <find>IF(</find>
       <find>NPC</find>
+      <find>view_reg</find>
+      <find>154</find>
+      <find>.ir</find>
+      <find>if()</find>
+      <find>branch_ex</find>
+      <find>150</find>
+      <find>.npc</find>
+      <find>addi</find>
+      <find>155</find>
       <find>cerr</find>
     </findStrings>
   </component>
@@ -159,8 +154,8 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/test.hpp" />
         <option value="$PROJECT_DIR$/new.hpp" />
-        <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$PROJECT_DIR$/basic.hpp" />
+        <option value="$PROJECT_DIR$/main.cpp" />
       </list>
     </option>
   </component>
@@ -243,23 +238,24 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83158000" />
+    <option name="totallyTimeSpent" value="88829000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24155405" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24151857" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3281471" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.3536068" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39745402" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.2970297" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.38330975" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.31541726" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.31400284" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32956153" />
@@ -270,18 +266,18 @@
       <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24155405" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24151857" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3281471" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.35643566" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39745402" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.2970297" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.38330975" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.31683168" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.31400284" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50080776" side_tool="true" weight="0.32956153" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32956153" />
@@ -344,36 +340,92 @@
         <watch expression="ID_EX.NPC" language="ObjectiveC" />
         <watch expression="MEM_WB.type" language="ObjectiveC" />
         <watch expression="EX_MEM.type" language="ObjectiveC" />
-        <watch expression="pc" language="ObjectiveC" />
-        <watch expression="predict(bht[pc])" language="ObjectiveC" />
-        <watch expression="round" language="ObjectiveC" />
+        <watch expression="MEM_WB.ALUoutput" language="ObjectiveC" />
+        <watch expression="EX_MEM.ALUoutput" language="ObjectiveC" />
+        <watch expression="ID_EX.A" language="ObjectiveC" />
+        <watch expression="ID_EX.imm" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
       <expression>
-        <expression-string>round == 32</expression-string>
+        <expression-string>ID_EX.IR == 0x8293</expression-string>
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>round == 30</expression-string>
+        <expression-string>round &gt; 150</expression-string>
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>round == 31</expression-string>
+        <expression-string>round == 152</expression-string>
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>if (round == 31)</expression-string>
+        <expression-string>round == 153</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>round == 1543</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>round == 154</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>round == 155</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>round &gt; 155</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>round == 149</expression-string>
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
     <expressions id="watch">
+      <expression>
+        <expression-string>EX_MEM.ALUoutput</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ID_EX.imm</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>ID_EX.A</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>MEM_WB.ALUoutput</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>MEM_WB.pc</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>MEM_WB.rd</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>btb[pc]</expression-string>
         <language-id>ObjectiveC</language-id>
@@ -386,41 +438,6 @@
       </expression>
       <expression>
         <expression-string>predict(bht[pc])</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>pc</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>EX_MEM.type</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>MEM_WB.type</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>MEM_WB.IR</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>ID_EX.rs2</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>ID_EX.rs1</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>ID_EX.NPC</expression-string>
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -460,8 +477,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/new.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="323" column="21" lean-forward="true" selection-start-line="323" selection-start-column="21" selection-end-line="323" selection-end-column="21" />
+        <state relative-caret-position="154">
+          <caret line="317" column="9" selection-start-line="317" selection-start-column="5" selection-end-line="317" selection-end-column="9" />
           <folding>
             <element signature="e#47#66#0" expanded="true" />
             <element signature="e#15342#15366#0" expanded="true" />
@@ -478,8 +495,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="129" column="20" selection-start-line="129" selection-start-column="20" selection-end-line="129" selection-end-column="20" />
+        <state relative-caret-position="197">
+          <caret line="125" column="34" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="34" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#164#2688#0" />
@@ -490,26 +507,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/basic.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-597">
-          <caret line="10" column="13" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="215">
+          <caret line="715" column="29" selection-start-line="715" selection-start-column="29" selection-end-line="715" selection-end-column="29" />
           <folding>
             <element signature="e#47#66#0" expanded="true" />
             <element signature="e#283#313#0" />
             <element signature="e#380#537#0" />
             <element signature="e#247#357#0" />
             <element signature="e#359#469#0" />
-            <element signature="e#1660#1703#1" />
+            <element signature="e#1681#2058#0" />
             <element signature="e#1712#7518#1" />
             <element signature="e#7527#7643#1" />
             <element signature="e#7653#7757#1" />
-            <element signature="e#8058#9594#0" />
-            <element signature="e#9597#11590#0" />
             <element signature="e#11592#11676#0" />
-            <element signature="e#11678#12579#0" />
             <element signature="e#15688#16512#0" />
             <element signature="e#16514#16899#0" />
-            <element signature="e#16901#17362#0" />
-            <element signature="e#17051#17075#0" expanded="true" />
+            <element signature="e#17934#17958#0" expanded="true" />
           </folding>
         </state>
       </provider>
