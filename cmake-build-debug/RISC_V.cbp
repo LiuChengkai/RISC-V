@@ -86,9 +86,6 @@
 		<Unit filename="/Users/lck/Desktop/RISC-V/main.cpp">
 			<Option target="code"/>
 		</Unit>
-		<Unit filename="/Users/lck/Desktop/RISC-V/new.hpp">
-			<Option target="code"/>
-		</Unit>
 		<Unit filename="/Users/lck/Desktop/RISC-V/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
