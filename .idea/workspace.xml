@@ -11,13 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b4266a67-10f0-4baa-b264-64a462b28f0d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basic.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/basic.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/code.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/code" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/code" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="b4266a67-10f0-4baa-b264-64a462b28f0d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/basic.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="715" column="29" selection-start-line="715" selection-start-column="29" selection-end-line="715" selection-end-column="29" />
+            <state relative-caret-position="311">
+              <caret line="721" column="39" lean-forward="true" selection-start-line="721" selection-start-column="39" selection-end-line="721" selection-end-column="39" />
               <folding>
                 <element signature="e#47#66#0" expanded="true" />
                 <element signature="e#283#313#0" />
@@ -73,19 +67,6 @@
                 <element signature="e#15688#16512#0" />
                 <element signature="e#16514#16899#0" />
                 <element signature="e#17934#17958#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/new.hpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="317" column="9" selection-start-line="317" selection-start-column="5" selection-end-line="317" selection-end-column="9" />
-              <folding>
-                <element signature="e#47#66#0" expanded="true" />
-                <element signature="e#15342#15366#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,13 +99,13 @@
       <find>view_reg</find>
       <find>154</find>
       <find>.ir</find>
-      <find>if()</find>
       <find>branch_ex</find>
       <find>150</find>
       <find>.npc</find>
       <find>addi</find>
       <find>155</find>
       <find>cerr</find>
+      <find>if()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -238,7 +219,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88829000" />
+    <option name="totallyTimeSpent" value="89101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -475,17 +456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/new.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="317" column="9" selection-start-line="317" selection-start-column="5" selection-end-line="317" selection-end-column="9" />
-          <folding>
-            <element signature="e#47#66#0" expanded="true" />
-            <element signature="e#15342#15366#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -505,10 +475,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/new.hpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="317" column="9" selection-start-line="317" selection-start-column="5" selection-end-line="317" selection-end-column="9" />
+          <folding>
+            <element signature="e#47#66#0" expanded="true" />
+            <element signature="e#15342#15366#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/basic.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="715" column="29" selection-start-line="715" selection-start-column="29" selection-end-line="715" selection-end-column="29" />
+        <state relative-caret-position="311">
+          <caret line="721" column="39" lean-forward="true" selection-start-line="721" selection-start-column="39" selection-end-line="721" selection-end-column="39" />
           <folding>
             <element signature="e#47#66#0" expanded="true" />
             <element signature="e#283#313#0" />
